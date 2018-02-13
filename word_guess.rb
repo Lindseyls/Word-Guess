@@ -85,22 +85,26 @@ class GuessMechanics
     @tally = 0
     @current_word = word_object.current_word
     @letter_holders = word_object.letter_holders
-
+    @guess_array = []
   end
 
   def guess_letter
     puts "Guess a letter."
-    user_guess = gets.chomp.downcase
-    alphabet = ("a".."z").to_a
-
-    until alphabet.include?(user_guess) #begin guess_letter user entry validation
-      puts "Please guess a single letter, no numbers or characters"
-      user_guess = gets.chomp.downcase
+    if @tally > 0
+      print "Already guessed letters: #{@guess_array.join(' ')}"
     end
 
+      user_guess = gets.chomp.downcase
+      alphabet = ("a".."z").to_a
+
+      until alphabet.include?(user_guess) #begin guess_letter user entry validation
+        puts "Please guess a single letter, no numbers or characters"
+        user_guess = gets.chomp.downcase
+      end
+      @guess_array << user_guess
     # Checking to see if the user guessed letter is included in the current word
     # replacing the correct guessed letter with the underscores in letter holder
-    # We are going to create an array that will include the wrong guessed letters 
+    # We are going to create an array that will include the wrong guessed letters
     if @current_word.include?(user_guess)
       puts "woot woot"
       @current_word.each_index do |letter_index|
@@ -111,6 +115,7 @@ class GuessMechanics
       print @letter_holders.join(' ')
     else
       puts "nooo"
+
       @tally += 1
     end #@current_word.include?
   end # ends guess_letter
