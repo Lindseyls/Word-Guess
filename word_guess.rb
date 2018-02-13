@@ -97,21 +97,22 @@ class GuessMechanics
       puts "Please guess a single letter, no numbers or characters"
       user_guess = gets.chomp.downcase
     end
-    # # force user to select valid input
-    # until user_input == "easy" || user_input == "hard"
-    #   puts "Please select easy or hard."
-    # end
 
-    # select difficulty of word list
+    # Checking to see if the user guessed letter is included in the current word
+    # replacing the correct guessed letter with the underscores in letter holder
+    # We are going to create an array that will include the wrong guessed letters 
     if @current_word.include?(user_guess)
       puts "woot woot"
-      letter_index = @current_word.index(user_guess)
-      @letter_holders[letter_index] = user_guess
-      return @letter_holders
+      @current_word.each_index do |letter_index|
+        if @current_word[letter_index] == user_guess
+          @letter_holders[letter_index] = user_guess
+        end # if @current_word[letter_index]
+      end #@current_word.each_index do
+      print @letter_holders.join(' ')
     else
       puts "nooo"
       @tally += 1
-    end
+    end #@current_word.include?
   end # ends guess_letter
 
 
