@@ -64,8 +64,9 @@ class WordMechanics
       @word_array = @easy_array
     end
     return @word_array
-  end #ends select_difficulty
+  end # ends select_difficulty
 
+  # create an array of underscores that mirrors the length of the current word
   def guess_letters
     guess_array = []
     @current_word.each do
@@ -80,9 +81,9 @@ class GuessMechanics
 
   attr_accessor :current_word, :letter_holders
 
-  def initialize
-    @current_word = WordMechanics.current_word
-    @letter_holders = WordMechanics.letter_holders
+  def initialize(word_object)
+    @current_word = word_object.current_word
+    @letter_holders = word_object.letter_holders
   end
 
 
