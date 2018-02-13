@@ -44,7 +44,7 @@ class WordMechanics
     @easy_array = %w[knights archers peasants cottages swords shields]
     @word_array = select_difficulty
     @current_word = @word_array.sample.split(//)
-    @letter_holders = guess_letters.join(' ')
+    @letter_holders = guess_letters
   end # ends WordMechanics initialize
 
   def select_difficulty
@@ -105,6 +105,9 @@ class GuessMechanics
     # select difficulty of word list
     if @current_word.include?(user_guess)
       puts "woot woot"
+      letter_index = @current_word.index(user_guess)
+      @letter_holders[letter_index] = user_guess
+      return @letter_holders
     else
       puts "nooo"
       @tally += 1
