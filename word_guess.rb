@@ -78,6 +78,12 @@ end
 
 class GuessMechanics
 
+  attr_accessor :current_word, :letter_holders
+
+  def initialize
+    @current_word = WordMechanics.current_word
+    @letter_holders = WordMechanics.letter_holders
+  end
 
 
 end
