@@ -25,14 +25,13 @@ require 'pry'
 #class
 class WordGuess
 
-attr_accessor :word_array
+  attr_accessor :word_array, :guess_ui
 
   def initialize
-    @tally = 0
-    @current_word = []
+    new_word = WordMechanics.new
+    guess_ui = GuessMechanics.new(new_word)
+    guess_ui.guess_letter
   end
-
-  #   ascii
 
 
 end
@@ -70,7 +69,7 @@ class WordMechanics
   def guess_letters
     guess_array = []
     @current_word.each do
-     guess_array << "_"
+      guess_array << "_"
     end
     return guess_array
   end
@@ -86,72 +85,84 @@ class GuessMechanics
     @current_word = word_object.current_word
     @letter_holders = word_object.letter_holders
     @guess_array = []
+    @play_again = "yes"
+  end
+
+  def ascii
+    case @tally
+    when 0
+      puts "Don't draw Trogdor!"
+    when 1
+      puts "Draw an S"
+    when 2
+      puts "Draw a more different S"
+    when 3
+      puts "Using consummate V's, give him teeth, spinities and angry eyebrows"
+    when 4
+      puts "You can add smoke or fire"
+    when 5
+      puts "And maybe add some wings, you know, if he's a wing-a-ling dragon."
+    when 6
+      puts "Put one of those beefy arms back on him for good measure."
+    when 7
+      puts "Add majestic lines... for majesty."
+      puts "The word was: #{@current_word}"
+      puts "Do you want to play again?"
+      @play_again = gets.chomp.downcase
+    end
   end
 
   def guess_letter
-    puts "Guess a letter."
-    if @tally > 0
-      print "Already guessed letters: #{@guess_array.join(' ')}"
-    end
+    until @play_again == "no"
+      while @tally < 7 && @current_word != @letter_holders
+        puts "\nSelect a letter at your peril!"
+        if @tally > 0
+          puts "\nAlready guessed letters: #{@guess_array.join(' ')}"
+        end
 
-      user_guess = gets.chomp.downcase
-      alphabet = ("a".."z").to_a
-
-      until alphabet.include?(user_guess) #begin guess_letter user entry validation
-        puts "Please guess a single letter, no numbers or characters"
         user_guess = gets.chomp.downcase
-      end
-      @guess_array << user_guess
-    # Checking to see if the user guessed letter is included in the current word
-    # replacing the correct guessed letter with the underscores in letter holder
-    # We are going to create an array that will include the wrong guessed letters
-    if @current_word.include?(user_guess)
-      puts "woot woot"
-      @current_word.each_index do |letter_index|
-        if @current_word[letter_index] == user_guess
-          @letter_holders[letter_index] = user_guess
-        end # if @current_word[letter_index]
-      end #@current_word.each_index do
-      print @letter_holders.join(' ')
-    else
-      puts "nooo"
+        alphabet = ("a".."z").to_a
 
-      @tally += 1
-    end #@current_word.include?
-  end # ends guess_letter
+        until alphabet.include?(user_guess) #begin guess_letter user entry validation
+          puts "Please guess a single letter, no numbers or characters"
+          user_guess = gets.chomp.downcase
+        end
 
+        # Guess array will include all the guessed letters
+        @guess_array << user_guess
 
+        # Checking to see if the user guessed letter is included in the current word
+        # replacing the correct guessed letter with the underscores in letter holder
+        if @current_word.include?(user_guess)
+          puts "\nCongrats! You guessed correctly"
+          @current_word.each_index do |letter_index|
+            if @current_word[letter_index] == user_guess
+              @letter_holders[letter_index] = user_guess
+            end # if @current_word[letter_index]
+          end #@current_word.each_index do
+          print @letter_holders.join(' ')
+        else
+          puts "Oooh, that sucks. You entered the wrong letter. Draw more TROGDOR!"
+
+          @tally += 1
+          ascii
+        end #@current_word.include?
+
+      end # end while loop
+
+      if @letter_holders = @current_word
+        puts "    __   _______ _   _   _    _ _____ _   _   _ _ _"
+        puts "    \\ \\ / |  _  | | | | | |  | |_   _| \\ | | | | | |"
+        puts "     \\ V /| | | | | | | | |  | | | | |  \\| | | | | |"
+        puts "      \\ / | | | | | | | | |/\\| | | | | . ` | | | | |"
+        puts "      | | \\ \\_/ | |_| | \\  /\\  /_| |_| |\\  | |_|_|_|"
+        puts "      \\_/  \\___/ \\___/   \\/  \\/ \\___/\\_| \\_/ (_(_(_)"
+        puts "\nDo you want to play again?"
+        @play_again = gets.chomp.downcase
+      end # end the win condition
+    end # end the until loop
+  end # ends GuessMechanics class
 end
-#   def user_input
-#
-#   end
-#
-#   def ascii
-#     case @tally
-#     when 0
-#       puts "Don't draw Trogdor!"
-#     when 1
-#       puts "Draw an S"
-#     when 2
-#       puts "Draw a more different S"
-#     when 3
-#       puts "Using consummate V's, give him teeth, spinities and angry eyebrows"
-#     when 4
-#       puts "You can add smoke or fire"
-#     when 5
-#       puts "And maybe add some wings, you know, if he's a wing-a-ling dragon."
-#     when 6
-#       puts "Put one of those beefy arms back on him for good measure."
-#     when 7
-#       puts "Add majestic lines... for majesty."
-#       puts "The word was: #{@current_word}"
-#     end
-#   end
-#
-# end
 
-test = WordMechanics.new
-test2 = GuessMechanics.new(test)
-
-test.guess_letters
+dabomb = WordGuess.new
 binding.pry
