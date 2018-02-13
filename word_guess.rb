@@ -1,3 +1,6 @@
+# help color and read code
+require 'colorize'
+require 'pry'
 
 #class
 class WordGuess
@@ -5,17 +8,12 @@ class WordGuess
   attr_accessor :hard_array, :easy_array
 
   def initialize()
-    tally = 0
+    @tally = 0
     @word_array
     @word_hash
     @hard_array = %w[axe countryside burninate]
     @easy_array = %w[knights archers peasants cottages swords shields]
-  end
-
-  def word_array
-    @word_array
-    @hard_array
-    @easy_array
+    ascii
   end
 
   def split_array
@@ -24,6 +22,10 @@ class WordGuess
 
   end
 
+  def
+    if user_input == @hard_array
+      puts
+  end
 
   def word_hash
 
@@ -31,42 +33,27 @@ class WordGuess
 
   end
 
-  def first_wrong_guess
-
-    # "first S of trogdor"
-
+  def ascii
+    case @tally
+    when 0
+      puts "Don't draw Trogdor!"
+    when 1
+      puts "Draw an S"
+    when 2
+      puts "Draw a more different S"
+    when 3
+      puts "Using consummate V's, give him teeth, spinities and angry eyebrows"
+    when 4
+      puts "You can add smoke or fire"
+    when 5
+      puts "And maybe add some wings, you know, if he's a wing-a-ling dragon."
+    when 6
+      puts "Put one of those beefy arms back on him for good measure."
+    when 7
+      puts "Add majestic lines... for majesty."
+      puts "The word was: #{@current_word}"
+    end
   end
-
-  def second_wrong_guess
-
-    # "second S of trogdor"
-
-  end
-
-  def third_wrong_guess
-
-    # "head and eyes of trogdor"
-
-  end
-
-  def fourth_wrong_guess
-
-    # "teeth and scales of trogdor"
-
-  end
-
-  def fifth_wrong_guess
-
-    # "eyebrows and wings of trogdor"
-
-  end
-
-  def sixth_wrong_guess
-
-    # "arm and legs of trogdor"
-
-  end
-
 
 end
 
