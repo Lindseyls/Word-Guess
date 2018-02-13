@@ -32,15 +32,9 @@ attr_accessor :word_array
     @current_word = []
   end
 
-  # attr_accessor :hard_array, :easy_array
-  #
-  # def initialize
-
-  #   @word_array
-  #   @word_hash
-  #   @user_input = user_input
-
   #   ascii
+
+
 end
 
 class WordMechanics
@@ -49,7 +43,7 @@ class WordMechanics
     @hard_array = %w[axe countryside burninate]
     @easy_array = %w[knights archers peasants cottages swords shields]
     @word_array = select_difficulty
-    @current_word = @word_array.sample
+    @current_word = @word_array.sample.split(//)
 
   end# ends WordMechanics initialize
 
@@ -71,10 +65,6 @@ class WordMechanics
     end
     return @word_array
   end #ends select_difficulty
-
-  def select_word
-    @current_word = @word_array
-  end
 
 end
 
@@ -111,4 +101,4 @@ end
 
 test = WordMechanics.new
 binding.pry
-puts test.current_word
+puts test.split_word
