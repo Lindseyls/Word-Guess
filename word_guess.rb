@@ -82,6 +82,7 @@ class GuessMechanics
   attr_accessor :current_word, :letter_holders
 
   def initialize(word_object)
+    @tally = 0
     @current_word = word_object.current_word
     @letter_holders = word_object.letter_holders
 
@@ -90,7 +91,12 @@ class GuessMechanics
   def guess_letter
     puts "Guess a letter."
     user_guess = gets.chomp.downcase
+    alphabet = ("a".."z").to_a
 
+    until alphabet.include?(user_guess) #begin guess_letter user entry validation
+      puts "Please guess a single letter, no numbers or characters"
+      user_guess = gets.chomp.downcase
+    end
     # # force user to select valid input
     # until user_input == "easy" || user_input == "hard"
     #   puts "Please select easy or hard."
@@ -101,9 +107,9 @@ class GuessMechanics
       puts "woot woot"
     else
       puts "nooo"
+      @tally += 1
     end
-    # return
-  end # ends select_difficulty
+  end # ends guess_letter
 
 
 end
@@ -136,5 +142,7 @@ end
 # end
 
 test = WordMechanics.new
+test2 = GuessMechanics.new(test)
+
+test.guess_letters
 binding.pry
-puts test.split_word
