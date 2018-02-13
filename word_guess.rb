@@ -25,60 +25,90 @@ require 'pry'
 #class
 class WordGuess
 
-  attr_accessor :hard_array, :easy_array
+attr_accessor :word_array
 
   def initialize
     @tally = 0
-    @word_array
-    @word_hash
-    @user_input = user_input
+    @current_word = []
+  end
+
+  # attr_accessor :hard_array, :easy_array
+  #
+  # def initialize
+
+  #   @word_array
+  #   @word_hash
+  #   @user_input = user_input
+
+  #   ascii
+end
+
+class WordMechanics
+  attr_accessor :word_array, :current_word
+  def initialize
     @hard_array = %w[axe countryside burninate]
     @easy_array = %w[knights archers peasants cottages swords shields]
-    ascii
-  end
+    @word_array = select_difficulty
+    @current_word = @word_array.sample
 
-  def split_array
-    word_array.sample
-  end
+  end# ends WordMechanics initialize
 
-  def user_input
+  def select_difficulty
     puts "Welcome to our Word Game!"
     puts "Please choose the difficulty level: easy or hard. >"
-    user_input = gets.chomp
-    if user_input == @hard_array
-      puts split_array
-    elsif user_input == @easy_array
-      puts split_array
-    end
-  end
+    user_input = gets.chomp.downcase
 
-  def ascii
-    case @tally
-    when 0
-      puts "Don't draw Trogdor!"
-    when 1
-      puts "Draw an S"
-    when 2
-      puts "Draw a more different S"
-    when 3
-      puts "Using consummate V's, give him teeth, spinities and angry eyebrows"
-    when 4
-      puts "You can add smoke or fire"
-    when 5
-      puts "And maybe add some wings, you know, if he's a wing-a-ling dragon."
-    when 6
-      puts "Put one of those beefy arms back on him for good measure."
-    when 7
-      puts "Add majestic lines... for majesty."
-      puts "The word was: #{@current_word}"
+    # force user to select valid input
+    until user_input == "easy" || user_input == "hard"
+      puts "Please select easy or hard."
     end
+
+    # select difficulty of word list
+    if user_input == "hard"
+      @word_array = @hard_array
+    elsif user_input == "easy"
+      @word_array = @easy_array
+    end
+    return @word_array
+  end #ends select_difficulty
+
+  def select_word
+    @current_word = @word_array
   end
 
 end
 
+class GuessMechanics
 
+end
+#   def user_input
+#
+#   end
+#
+#   def ascii
+#     case @tally
+#     when 0
+#       puts "Don't draw Trogdor!"
+#     when 1
+#       puts "Draw an S"
+#     when 2
+#       puts "Draw a more different S"
+#     when 3
+#       puts "Using consummate V's, give him teeth, spinities and angry eyebrows"
+#     when 4
+#       puts "You can add smoke or fire"
+#     when 5
+#       puts "And maybe add some wings, you know, if he's a wing-a-ling dragon."
+#     when 6
+#       puts "Put one of those beefy arms back on him for good measure."
+#     when 7
+#       puts "Add majestic lines... for majesty."
+#       puts "The word was: #{@current_word}"
+#     end
+#   end
+#
+# end
 
-
-  guess = WordGuess.new
-  puts guess.hard_array.sample
-  # if we ran this, the class is not here yet
+test = WordMechanics.new
+binding.pry
+puts test.current_word
