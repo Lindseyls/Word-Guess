@@ -38,14 +38,14 @@ attr_accessor :word_array
 end
 
 class WordMechanics
-  attr_accessor :word_array, :current_word
+  attr_accessor :word_array, :current_word, :stuff
   def initialize
     @hard_array = %w[axe countryside burninate]
     @easy_array = %w[knights archers peasants cottages swords shields]
     @word_array = select_difficulty
     @current_word = @word_array.sample.split(//)
-
-  end# ends WordMechanics initialize
+    @stuff = guess_letters.join(' ')
+  end # ends WordMechanics initialize
 
   def select_difficulty
     puts "Welcome to our Word Game!"
@@ -66,9 +66,19 @@ class WordMechanics
     return @word_array
   end #ends select_difficulty
 
+  def guess_letters
+    guess_array = []
+    @current_word.each do
+     guess_array << "_"
+    end
+    return guess_array
+  end
+
 end
 
 class GuessMechanics
+
+
 
 end
 #   def user_input
