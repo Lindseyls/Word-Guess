@@ -84,7 +84,26 @@ class GuessMechanics
   def initialize(word_object)
     @current_word = word_object.current_word
     @letter_holders = word_object.letter_holders
+
   end
+
+  def guess_letter
+    puts "Guess a letter."
+    user_guess = gets.chomp.downcase
+
+    # # force user to select valid input
+    # until user_input == "easy" || user_input == "hard"
+    #   puts "Please select easy or hard."
+    # end
+
+    # select difficulty of word list
+    if @current_word.include?(user_guess)
+      puts "woot woot"
+    else
+      puts "nooo"
+    end
+    # return
+  end # ends select_difficulty
 
 
 end
