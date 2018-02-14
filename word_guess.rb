@@ -1,6 +1,5 @@
 # help color and read code
 require 'colorize'
-require 'pry'
 
 # Learning Goals:
 # Create a complex program from start to finish
@@ -20,9 +19,6 @@ require 'pry'
 # The player completes the word, or guesses the whole word correctly
 # The diagram representing the tally marks is complete
 
-
-
-#class
 class WordGuess
 
   attr_accessor :word_array, :guess_ui
@@ -38,7 +34,7 @@ class WordGuess
     end
   end
 
-end
+end # end WordGuess class
 
 class WordMechanics
   attr_accessor :word_array, :current_word, :letter_holders
@@ -85,7 +81,7 @@ class WordMechanics
     return guess_array
   end
 
-end
+end # end WordMechanics class
 
 class GuessMechanics
 
@@ -103,7 +99,7 @@ class GuessMechanics
     when 0
       puts "Don't draw Trogdor!"
     when 1
-      puts "Draw an S"
+      puts "\nDraw an S"
       puts "\n                  ,_.._____  ._._._."
       puts "                _/                  `-._____   "
       puts "              /"
@@ -124,7 +120,7 @@ class GuessMechanics
       puts "                   _._.,-  `"
 
     when 2
-      puts "Draw a more different S"
+      puts "\nDraw a more different S"
       puts "\n                  ,_.._____  ._._._."
       puts "                _/                  `-._____   "
       puts "              /"
@@ -146,7 +142,7 @@ class GuessMechanics
       puts "                   `--..,_ _,-'"
 
     when 3
-      puts "Using consummate V's, give him teeth, spinities and angry eyebrows"
+      puts "\nUsing consummate V's, give him teeth, spinities and angry eyebrows"
       puts "\n                                    \\  /"
       puts "                   ,,-.__ ._.,._`._ .\\/."
       puts "                __ `.                  `-._____m"
@@ -168,7 +164,7 @@ class GuessMechanics
       puts "                 ``,_A_/\\-| `   ,'"
       puts "                   `--..,_ _,-'"
     when 4
-      puts "You can add smoke or fire"
+      puts "\nYou can add smoke or fire"
       puts "\n                                                :::"
       puts "                                             :: :::."
       puts "                                             .:::::"
@@ -198,7 +194,7 @@ class GuessMechanics
       puts "                 ``,_A_/\\-| `   ,'"
       puts "                   `--..,_ _,-'"
     when 5
-      puts "And maybe add some wings, you know, if he's a wing-a-ling dragon."
+      puts "\nAnd maybe add some wings, you know, if he's a wing-a-ling dragon."
       puts "\n                                                :::"
       puts "                                             :: :::."
       puts "                     \\/,                    .:::::"
@@ -229,7 +225,7 @@ class GuessMechanics
       puts "                   `--..,_ _,-'"
 
     when 6
-      puts "Put one of those beefy arms back on him for good measure."
+      puts "\nPut one of those beefy arms back on him for good measure."
       puts "\n                                                :::"
       puts "                                             :: :::."
       puts "                     \\/,                    .:::::"
@@ -263,7 +259,7 @@ class GuessMechanics
       puts "                          |__"
 
     when 7
-      puts "Add majestic lines... for majesty."
+      puts "\nAdd majestic lines... for majesty."
       puts "\n                                                :::"
       puts "                                             :: :::."
       puts "                     \\/,                    .:::::"
@@ -329,6 +325,7 @@ class GuessMechanics
         print @letter_holders.join(' ')
       else
         puts "Oooh, that sucks. You entered the wrong letter. Draw more TROGDOR!"
+        print @letter_holders.join(' ')
 
         @tally += 1
         ascii
@@ -353,4 +350,3 @@ end # ends GuessMechanics class
 
 
 dabomb = WordGuess.new
-binding.pry
