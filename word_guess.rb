@@ -28,9 +28,15 @@ class WordGuess
   attr_accessor :word_array, :guess_ui
 
   def initialize
+    @play_again = "yes"
+    while @play_again == "yes"
     new_word = WordMechanics.new
     guess_ui = GuessMechanics.new(new_word)
     guess_ui.guess_letter
+    puts "\nDo you want to play again?"
+    @play_again = gets.chomp.downcase
+
+  end
   end
 
 
@@ -54,6 +60,7 @@ class WordMechanics
     # force user to select valid input
     until user_input == "easy" || user_input == "hard"
       puts "Please select easy or hard."
+      user_input = gets.chomp.downcase
     end
 
     # select difficulty of word list
@@ -85,7 +92,6 @@ class GuessMechanics
     @current_word = word_object.current_word
     @letter_holders = word_object.letter_holders
     @guess_array = []
-    @play_again = "yes"
   end
 
   def ascii
@@ -106,14 +112,10 @@ class GuessMechanics
       puts "Put one of those beefy arms back on him for good measure."
     when 7
       puts "Add majestic lines... for majesty."
-      puts "The word was: #{@current_word}"
-      puts "Do you want to play again?"
-      @play_again = gets.chomp.downcase
     end
   end
 
   def guess_letter
-    until @play_again == "no"
       while @tally < 7 && @current_word != @letter_holders
         puts "\nSelect a letter at your peril!"
         if @tally > 0
@@ -150,19 +152,21 @@ class GuessMechanics
 
       end # end while loop
 
-      if @letter_holders = @current_word
-        puts "    __   _______ _   _   _    _ _____ _   _   _ _ _"
+      if @tally < 7 && @letter_holders = @current_word
+        puts "\n    __   _______ _   _   _    _ _____ _   _   _ _ _"
         puts "    \\ \\ / |  _  | | | | | |  | |_   _| \\ | | | | | |"
         puts "     \\ V /| | | | | | | | |  | | | | |  \\| | | | | |"
         puts "      \\ / | | | | | | | | |/\\| | | | | . ` | | | | |"
         puts "      | | \\ \\_/ | |_| | \\  /\\  /_| |_| |\\  | |_|_|_|"
         puts "      \\_/  \\___/ \\___/   \\/  \\/ \\___/\\_| \\_/ (_(_(_)"
-        puts "\nDo you want to play again?"
-        @play_again = gets.chomp.downcase
+
+      else
+        puts "The word was: #{@current_word}"
       end # end the win condition
+
     end # end the until loop
   end # ends GuessMechanics class
-end
+
 
 dabomb = WordGuess.new
 binding.pry
